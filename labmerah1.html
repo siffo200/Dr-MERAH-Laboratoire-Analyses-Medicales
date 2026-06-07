@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مخبر التحاليل الطبية د. مراح كريم - Laboratoire Dr MERAH</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        arabic: ['Cairo', 'sans-serif'],
+                        english: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#0b132b',
+                            blue: '#005bb5',
+                            blueLight: '#e6f0fa',
+                            red: '#dc2626',
+                            slate: '#f8fafc',
+                            cyan: '#06b6d4'
+                        }
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px -10px rgba(0, 91, 181, 0.08)',
+                        'premium-hover': '0 20px 50px -15px rgba(0, 91, 181, 0.15)',
+                        'glow': '0 0 40px rgba(0, 91, 181, 0.2)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .font-ar { font-family: 'Cairo', sans-serif; }
+        .font-en-fr { font-family: 'Inter', sans-serif; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #005bb5; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-ar transition-all duration-300">
+
+    <!-- شريط الإعلان العلوي -->
+    <div class="bg-brand-navy text-slate-300 py-3 px-4 border-b border-slate-800 text-xs md:text-sm font-medium">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+                <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-clock text-brand-blue"></i>
+                    <span data-i18n="top_hours">مفتوح 24 سا/24 سا - طيلة أيام الأسبوع</span>
+                </span>
+                <span class="hidden sm:inline text-slate-700">|</span>
+                <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-location-dot text-brand-red"></i>
+                    <span data-i18n="top_location">وسط المدينة (Centre Ville)، بشار</span>
+                </span>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <a href="tel:0771966531" class="hover:text-white transition-colors flex items-center gap-1.5 font-bold">
+                    <i class="fa-solid fa-phone-volume text-brand-blue animate-pulse"></i>
+                    <span dir="ltr">0771 96 65 31</span>
+                </a>
+                
+                <!-- محول اللغات بثلاث لغات -->
+                <div class="relative inline-block text-left">
+                    <button id="langBtn" class="flex items-center gap-1.5 bg-slate-800/80 hover:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-xs font-bold text-white transition-all">
+                        <i class="fa-solid fa-globe text-brand-blue"></i>
+                        <span id="currentLangLabel">العربية</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] opacity-70"></i>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute left-0 sm:right-0 mt-2 w-32 rounded-xl bg-white shadow-xl border border-slate-100 py-1.5 z-[110] text-slate-800">
+                        <button onclick="changeLanguage('ar')" class="flex items-center gap-2 w-full px-4 py-2 text-xs font-bold hover:bg-slate-50 transition-colors text-right">
+                            <span class="text-sm">🇩🇿</span> العربية
+                        </button>
+                        <button onclick="changeLanguage('fr')" class="flex items-center gap-2 w-full px-4 py-2 text-xs font-bold hover:bg-slate-50 transition-colors text-right">
+                            <span class="text-sm">🇫🇷</span> Français
+                        </button>
+                        <button onclick="changeLanguage('en')" class="flex items-center gap-2 w-full px-4 py-2 text-xs font-bold hover:bg-slate-50 transition-colors text-right">
+                            <span class="text-sm">🇬🇧</span> English
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- القائمة الرئيسية -->
+    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-22 flex justify-between items-center py-4">
+            
+            <a href="#" class="flex items-center gap-3.5 group">
+                <div class="bg-brand-blue text-white p-3 rounded-2xl shadow-lg shadow-blue-900/20 group-hover:scale-105 transition-transform flex items-center justify-center">
+                    <i class="fa-solid fa-microscope text-xl text-white"></i>
+                </div>
+                <div>
+                    <span class="block text-lg font-extrabold text-brand-navy tracking-tight" data-i18n="logo_title">مخبر التحاليل الطبية</span>
+                    <span class="block text-[11px] text-brand-red font-bold tracking-widest uppercase" data-i18n="logo_sub">الدكتور مراح كريم</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-600">
+                <a href="#about" class="hover:text-brand-blue transition-colors" data-i18n="nav_about">عن المخبر</a>
+                <a href="#services" class="hover:text-brand-blue transition-colors" data-i18n="nav_services">التحاليل والخدمات</a>
+                <a href="#testimonials" class="hover:text-brand-blue transition-colors" data-i18n="nav_reviews">آراء المرضى</a>
+                <a href="#contact" class="hover:text-brand-blue transition-colors" data-i18n="nav_contact">اتصل بنا</a>
+            </nav>
+
+            <div class="flex items-center gap-3.5">
+                <a href="#booking" class="bg-brand-blue hover:bg-blue-700 text-white text-xs md:text-sm font-bold py-3 px-6 rounded-2xl shadow-md transition-all hover:-translate-y-0.5 flex items-center gap-2 border border-blue-800" data-i18n="nav_booking_btn">
+                    <i class="fa-solid fa-flask"></i> 
+                    <span>حجز موعد للتحليل</span>
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden text-brand-navy p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
+                    <i class="fa-solid fa-bars-staggered text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 px-6 py-6 space-y-4 shadow-xl">
+            <a href="#about" class="block font-bold text-slate-700 hover:text-brand-blue py-1 text-base" data-i18n="nav_about">عن المخبر</a>
+            <a href="#services" class="block font-bold text-slate-700 hover:text-brand-blue py-1 text-base" data-i18n="nav_services">التحاليل والخدمات</a>
+            <a href="#testimonials" class="block font-bold text-slate-700 hover:text-brand-blue py-1 text-base" data-i18n="nav_reviews">آراء المرضى</a>
+            <a href="#contact" class="block font-bold text-slate-700 hover:text-brand-blue py-1 text-base" data-i18n="nav_contact">اتصل بنا</a>
+        </div>
+    </header>
+
+    <!-- الواجهة الرئيسية (Hero Section) مع تعديلات التصميم والحجم -->
+    <section class="relative bg-gradient-to-b from-brand-slate via-white to-brand-slate py-16 md:py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px] opacity-60"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
+                    <div class="inline-flex items-center gap-2 bg-brand-blueLight text-brand-blue text-xs font-bold px-4 py-2 rounded-full border border-blue-200 shadow-sm">
+                        <span class="flex h-2.5 w-2.5 rounded-full bg-blue-500 animate-ping"></span>
+                        <span data-i18n="hero_badge">دقة في النتائج، سرعة في الإنجاز، وثقة في التشخيص</span>
+                    </div>
+                    
+                    <!-- تم تصغير الخط هنا وإضافة تدرج لوني (Gradient) عصري -->
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy leading-tight" id="heroTitle">
+                        <span data-i18n="hero_title_1">مخبر التحاليل الطبية</span> <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-cyan-500" data-i18n="hero_title_colored">للدكتور مراح كريم</span>
+                    </h1>
+                    
+                    <p class="text-slate-500 text-sm md:text-base max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed" data-i18n="hero_description">
+                        مخبركم المعتمد في قلب مدينة بشار، مجهز بأحدث تقنيات التحليل الآلي لتوفير نتائج طبية دقيقة وموثوقة لمختلف التحاليل البيولوجية والهرمونية على مدار الساعة 24/24.
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#booking" class="bg-brand-blue hover:bg-blue-700 text-white font-extrabold py-3.5 px-8 rounded-2xl shadow-xl shadow-blue-700/20 text-sm md:text-base transition-all hover:-translate-y-0.5 flex items-center gap-2" data-i18n="hero_booking_btn">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <span>احجز موعد لتحليلك</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative mt-8 lg:mt-0">
+                    <div class="relative mx-auto max-w-md">
+                        <!-- تأثيرات الإضاءة وراء الصورة -->
+                        <div class="absolute -top-10 -left-10 w-40 h-40 bg-brand-blue/20 rounded-full blur-3xl animate-float"></div>
+                        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-cyan/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+                        
+                        <!-- إطار الصورة مع الظل المضيء (Glow) -->
+                        <div class="relative bg-white p-3 rounded-[32px] shadow-glow border border-slate-100 overflow-hidden group">
+                            <div class="rounded-2xl overflow-hidden relative h-[300px] md:h-[400px]">
+                                <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=800" alt="Laboratoire Dr Merah" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent"></div>
+                            </div>
+                            
+                            <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-slate-100/50 shadow-xl flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-brand-blueLight text-brand-blue w-10 h-10 rounded-xl flex items-center justify-center font-bold">
+                                        <i class="fa-solid fa-vial-circle-check animate-pulse"></i>
+                                    </div>
+                                    <div>
+                                        <span class="block text-[10px] text-brand-blue font-extrabold uppercase tracking-widest" data-i18n="live_status_label">حالة المخبر</span>
+                                        <span class="block text-sm font-extrabold text-brand-navy" data-i18n="live_status_active">نستقبل التحاليل حالياً</span>
+                                    </div>
+                                </div>
+                                <span class="h-3 w-3 rounded-full bg-blue-500 animate-ping"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section id="services" class="py-24 bg-brand-slate border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-brand-blue font-extrabold text-xs uppercase tracking-widest block" data-i18n="services_tag">باقة التحاليل المتوفرة</span>
+                <h2 class="text-3xl font-black text-brand-navy" data-i18n="services_title">تشخيص دقيق لمختلف التخصصات البيولوجية</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl border border-slate-100/60 hover:shadow-premium text-center transition-all group">
+                    <div class="bg-blue-50 text-brand-blue w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-droplet text-2xl"></i>
+                    </div>
+                    <h3 class="font-extrabold text-lg text-brand-navy mb-3" data-i18n="acc_title_1">تحاليل الدم الروتينية والشاملة</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="acc_desc_1">
+                        (FNS, Glycémie, Cholestérol, Bilan Rénal). نتائج دقيقة وسريعة للاطمئنان على صحتك العامة.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-slate-100/60 hover:shadow-premium text-center transition-all group">
+                    <div class="bg-blue-50 text-brand-blue w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-dna text-2xl"></i>
+                    </div>
+                    <h3 class="font-extrabold text-lg text-brand-navy mb-3" data-i18n="acc_title_2">التحاليل الهرمونية والمناعية</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="acc_desc_2">
+                        تحاليل الغدة الدرقية، هرمونات الخصوبة، تحاليل الحمل، بأجهزة مؤتمتة بالكامل خالية من الأخطاء.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-slate-100/60 hover:shadow-premium text-center transition-all group">
+                    <div class="bg-red-50 text-brand-red w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-truck-medical text-2xl"></i>
+                    </div>
+                    <h3 class="font-extrabold text-lg text-brand-navy mb-3" data-i18n="acc_title_3">تحاليل الاستعجالات 24/24</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="acc_desc_3">
+                        نضمن استقبال وإجراء التحاليل المستعجلة ليلاً ونهاراً طيلة أيام الأسبوع مع تسليم النتائج في وقت قياسي.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نظام الحجز الرقمي -->
+    <section id="booking" class="py-24 bg-gradient-to-br from-brand-navy to-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,91,181,0.15),transparent_40%)]"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16 space-y-3">
+                <div class="bg-white/10 backdrop-blur-md text-brand-blueLight w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-white/10 shadow-lg">
+                    <i class="fa-solid fa-calendar-plus text-3xl"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight" data-i18n="booking_title">احجز موعداً لإجراء تحاليلك</h2>
+                <p class="text-slate-300 text-sm md:text-base max-w-xl mx-auto" data-i18n="booking_sub">لتفادي الانتظار، قم بتسجيل موعدك مسبقاً وسنقوم بتجهيز ملفك فور وصولك للمخبر.</p>
+            </div>
+
+            <div class="bg-white p-8 sm:p-12 rounded-[36px] shadow-2xl text-slate-800 border border-slate-100">
+                <form id="bookingForm" class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black text-brand-navy uppercase tracking-wider" data-i18n="label_name">الاسم واللقب *</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400"><i class="fa-regular fa-user"></i></span>
+                                <input type="text" id="patientName" required placeholder="أدخل اسمك الكامل" class="w-full pr-11 pl-4 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all font-semibold text-sm bg-slate-50">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black text-brand-navy uppercase tracking-wider" data-i18n="label_phone">رقم الهاتف *</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400"><i class="fa-solid fa-phone"></i></span>
+                                <input type="tel" id="patientPhone" name="patientPhone" required 
+                                  pattern="0[567][0-9]{8}" 
+                                   maxlength="10" 
+                                    title="يرجى إدخال رقم جزائري صحيح يتكون من 10 أرقام ويبدأ بـ 05، 06، أو 07"
+                                     placeholder="مثال: 0661234567" 
+                                      class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-brand-blue">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black text-brand-navy uppercase tracking-wider" data-i18n="label_analysis">نوع التحليل المطلوب *</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400"><i class="fa-solid fa-vial"></i></span>
+                                <select id="analysisType" required class="w-full pr-11 pl-4 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all bg-slate-50 font-semibold text-sm appearance-none">
+                                    <option value="" data-i18n="select_analysis">اختر نوع التحليل...</option>
+                                    <option value="bilan_standard" data-i18n="ana_1">تحاليل شاملة (Bilan Standard)</option>
+                                    <option value="bilan_hormonal" data-i18n="ana_2">تحاليل هرمونية / مناعية</option>
+                                    <option value="bilan_prenuptial" data-i18n="ana_3">تحاليل الزواج (Bilan Prénuptial)</option>
+                                    <option value="other" data-i18n="ana_4">تحاليل أخرى / أملك وصفة طبية</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black text-brand-navy uppercase tracking-wider" data-i18n="label_date">تاريخ الموعد المفضل *</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400"><i class="fa-regular fa-calendar"></i></span>
+                                <input type="date" id="appointmentDate" required class="w-full pr-11 pl-4 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all font-semibold text-sm bg-slate-50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-extrabold py-4 px-8 rounded-2xl shadow-xl shadow-brand-blue/20 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-3 mt-4 text-base tracking-wide">
+                        <span data-i18n="btn_submit">تأكيد حجز الموعد</span>
+                        <i class="fa-solid fa-check-circle text-sm"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم مراجعات المرضى (3 تقييمات لتوازن التصميم) -->
+    <section id="testimonials" class="py-24 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20 space-y-3">
+                <span class="text-brand-blue font-extrabold text-xs uppercase tracking-widest block" data-i18n="reviews_tag">ثقة المرضى</span>
+                <h2 class="text-3xl font-black text-brand-navy" data-i18n="reviews_title">تقييمات المخبر على Google Maps</h2>
+                <p class="text-slate-500 text-sm md:text-base" data-i18n="reviews_sub">حاصلون على تقييم 4.8 نجوم بفضل ثقة مرضانا الكرام في ولاية بشار.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- التقييم 1 -->
+                <div class="bg-brand-slate p-8 rounded-3xl border border-slate-100/60 flex flex-col justify-between h-full relative group hover:shadow-premium transition-all duration-300">
+                    <span class="absolute top-6 left-6 text-slate-200 text-5xl font-serif select-none pointer-events-none">“</span>
+                    <div class="space-y-4 relative">
+                        <div class="flex items-center gap-1 text-amber-400">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed font-semibold" data-i18n="review_text_1">
+                            "Un bon labo , Ya3tekom saha"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4.5 pt-6 border-t border-slate-200/50 mt-6">
+                        <div class="w-11 h-11 bg-brand-blue text-white rounded-2xl flex items-center justify-center font-black text-xs shadow-md">WB</div>
+                        <div>
+                            <h4 class="font-extrabold text-brand-navy text-sm">Wafia Boulahdour</h4>
+                            <span class="text-xs text-slate-400 font-bold" data-i18n="review_sub_1">تقييم معتمد من جوجل</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- التقييم 2 -->
+                <div class="bg-brand-slate p-8 rounded-3xl border border-slate-100/60 flex flex-col justify-between h-full relative group hover:shadow-premium transition-all duration-300">
+                    <span class="absolute top-6 left-6 text-slate-200 text-5xl font-serif select-none pointer-events-none">“</span>
+                    <div class="space-y-4 relative">
+                        <div class="flex items-center gap-1 text-amber-400">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed font-semibold" data-i18n="review_text_2">
+                            "Mashallah. خدمة في القمة وموثوقية في النتائج."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4.5 pt-6 border-t border-slate-200/50 mt-6">
+                        <div class="w-11 h-11 bg-brand-red text-white rounded-2xl flex items-center justify-center font-black text-xs shadow-md">DM</div>
+                        <div>
+                            <h4 class="font-extrabold text-brand-navy text-sm">Djamila Merah</h4>
+                            <span class="text-xs text-slate-400 font-bold" data-i18n="review_sub_2">تقييم معتمد من جوجل</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- التقييم 3 المضاف بالدارجة -->
+                <div class="bg-brand-slate p-8 rounded-3xl border border-slate-100/60 flex flex-col justify-between h-full relative group hover:shadow-premium transition-all duration-300">
+                    <span class="absolute top-6 left-6 text-slate-200 text-5xl font-serif select-none pointer-events-none">“</span>
+                    <div class="space-y-4 relative">
+                        <div class="flex items-center gap-1 text-amber-400">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed font-semibold" data-i18n="review_text_3">
+                            "مخبر ما شاء الله، النظافة والاستقبال في القمة، والنتيجة خرجتلي بالخف. ربي يوفقكم وطاقم طبي محترف."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4.5 pt-6 border-t border-slate-200/50 mt-6">
+                        <div class="w-11 h-11 bg-brand-cyan text-white rounded-2xl flex items-center justify-center font-black text-xs shadow-md">SK</div>
+                        <div>
+                            <h4 class="font-extrabold text-brand-navy text-sm">Soumia K.</h4>
+                            <span class="text-xs text-slate-400 font-bold" data-i18n="review_sub_3">مريضة بالمخبر</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم معلومات الاتصال وخريطة الوصول الدقيقة -->
+    <section id="contact" class="py-24 bg-brand-slate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
+                <div class="lg:col-span-5 flex flex-col justify-between space-y-12">
+                    <div class="space-y-4">
+                        <span class="text-brand-blue font-extrabold text-xs uppercase tracking-widest block" data-i18n="contact_tag">موقعنا واتصالنا</span>
+                        <h2 class="text-3xl font-black text-brand-navy" data-i18n="contact_title">نسعد باستقبالكم وتوجيهكم</h2>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-5">
+                            <div class="bg-blue-100 text-brand-blue w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-map-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-brand-navy text-base" data-i18n="contact_add_label">العنوان الفعلي</h4>
+                                <p class="text-slate-500 text-sm mt-1 leading-relaxed">Centre ville, JQ9P+C5V, Béchar</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-5">
+                            <div class="bg-blue-100 text-brand-blue w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-phone-volume text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-brand-navy text-base" data-i18n="contact_phone_label">الهاتف للإستفسار</h4>
+                                <p class="text-slate-500 text-sm mt-1 font-bold" dir="ltr">0771 96 65 31 / 0670 26 06 00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-5">
+                            <div class="bg-blue-100 text-brand-blue w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-envelope text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-brand-navy text-base" data-i18n="contact_email_label">البريد الإلكتروني</h4>
+                                <p class="text-slate-500 text-sm mt-1 font-bold" dir="ltr">houchi.seddiki@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- خريطة مبسطة ودقيقة بالإحداثيات المحدثة -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white p-5 rounded-[36px] shadow-premium border border-slate-100 h-full min-h-[400px] flex flex-col">
+                        <h4 class="font-extrabold text-brand-navy mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-compass text-brand-blue"></i>
+                            <span data-i18n="map_title">تتبع موقع المخبر على خريطة بشار</span>
+                        </h4>
+                        <div class="flex-1 rounded-[24px] overflow-hidden border border-slate-100 bg-slate-100 relative min-h-[300px]">
+                            <!-- إحداثيات دقيقة لموقع مخبر الدكتور مراح في بشار -->
+                            <iframe class="absolute inset-0 w-full h-full border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3434.619086884024!2d-2.217148184888126!3d31.6186168813955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd855f003b0b2951%3A0xf228b0a7cbf5175d!2sDR%20MERAH%20%2C%20L'aboratoire%20d'analyse%20m%C3%A9dicale!5e0!3m2!1sar!2sdz!4v1717700000000!5m2!1sar!2sdz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="bg-brand-navy text-slate-400 py-12 border-t border-slate-800 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center space-y-4">
+            <div class="bg-brand-blue text-white p-3 rounded-2xl w-14 h-14 flex items-center justify-center shadow-lg">
+                <i class="fa-solid fa-microscope text-2xl"></i>
+            </div>
+            <h3 class="text-white text-lg font-extrabold" data-i18n="footer_title">مخبر التحاليل الطبية د. مراح كريم</h3>
+            <p class="text-sm max-w-md" data-i18n="footer_desc">نحن هنا لخدمتكم 24 ساعة في اليوم لضمان أدق النتائج وأفضل رعاية طبية بمدينة بشار.</p>
+            <p class="text-xs mt-6 pt-6 border-t border-slate-800 w-full" data-i18n="footer_copy">© 2026 Laboratoire Dr MERAH - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- نافذة تأكيد الموعد -->
+    <div id="bookingModal" class="fixed inset-0 bg-brand-navy/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-[32px] p-8 max-w-md w-full border border-slate-100 text-center space-y-6 shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 bg-blue-50 text-brand-blue rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-xl font-black text-brand-navy" data-i18n="modal_title">تم تسجيل طلب حجزك بنجاح!</h3>
+                <p class="text-slate-500 text-sm leading-relaxed" id="modalTextContent">
+                    <!-- سيتم تعبئته بواسطة الجافاسكريبت -->
+                </p>
+            </div>
+            <button id="closeModalBtn" class="w-full bg-brand-navy hover:bg-brand-blue text-white font-extrabold py-3.5 px-4 rounded-xl text-sm transition-all shadow-md" data-i18n="modal_btn">
+                حسناً، فهمت
+            </button>
+        </div>
+    </div>
+
+    <!-- جافا سكريبت للقاموس الكامل والتفاعلية -->
+    <script>
+        // تفعيل قائمة الموبايل
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // نظام الحجز
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingModal = document.getElementById('bookingModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        bookingForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // 1. نلمو المعلومات لي كتبها المريض
+    const name = document.getElementById('patientName').value;
+    const phone = document.getElementById('patientPhone').value;
+    const analysis = document.getElementById('analysisType').value;
+    const date = document.getElementById('appointmentDate').value;
+
+    // 2. هذا هو الرابط الوهمي لي نبعثو ليه الداتا (Webhook)
+    // نهار تفتح كونط في منصة الربط، حط الرابط تاعك هنا بين المزدوجتين
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbweVHahFOiXIjqDMEdCbZLJqyvuxZ7l5Gh21YjUPMFAklzwys4dI8XjOF0-gkD9DexJqw/exec";
+    // نجبدو زر الإرسال
+    const submitBtn = bookingForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML; // نحفظو الكلمة الأصلية "تأكيد الحجز"
+
+    // نبدلو الزر ونحبسوه
+    submitBtn.innerHTML = 'جاري الإرسال...';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.6';
+    submitBtn.style.cursor = 'not-allowed';
+   try {
+        // 3. نبعثو الداتا بصمت
+        let response = await fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({
+                patient_name: name,
+                patient_phone: phone,
+                test_type: analysis,
+                date: date
+            })
+        });
+
+        // 4. إذا راحت الداتا بنجاح
+        if (response.ok) {
+            // نعمرو النص تاع النافذة باسم المريض أولاً
+            document.getElementById('modalTextContent').innerHTML = `مرحباً <span class="font-extrabold text-brand-blue">${name}</span>، تم تسجيل طلبك بنجاح.`;
+            
+            // وممبعد نظهرو النافذة
+            bookingModal.classList.remove('hidden');
+            bookingModal.querySelector('div').classList.remove('scale-95');
+            bookingModal.querySelector('div').classList.add('scale-100');
+        } else {
+            alert("حدث خطأ أثناء التسجيل، يرجى المحاولة مرة أخرى.");
+        }
+
+    } catch (error) {
+        // هادي تتنفذ غير يلا كاين مشكل في الاتصال
+        console.error("Error:", error);
+        alert("حدث خطأ في الاتصال، تأكد من شبكة الإنترنت.");
+        } finally {
+        // نرجعو الزر للحالة الطبيعية تاعو
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.cursor = 'pointer';
+        
+        // تفريغ الفورميلار إذا نجح التسجيل باش المريض ما يعاودش يبعث نفس الداتا
+        if (response && response.ok) {
+            bookingForm.reset(); 
+        }
+    }
+    
+});
+
+    // يبقى المودال يخدم
+    const currentLang = document.documentElement.lang;
+    const modalContent = document.getElementById('modalTextContent');
+
+    if(currentLang === 'fr') {
+        modalContent.innerHTML = `Bonjour <span class="font-extrabold text-brand-blue">${name}</span>, votre demande a été enregistrée.`;
+    } else if(currentLang === 'en') {
+        modalContent.innerHTML = `Hello <span class="font-extrabold text-brand-blue">${name}</span>, your request has been registered.`;
+    } else {
+        modalContent.innerHTML = `مرحباً <span class="font-extrabold text-brand-blue">${name}</span>، تم تسجيل طلبك بنجاح.`;
+    }
+
+        closeModalBtn.addEventListener('click', () => {
+            bookingModal.classList.add('hidden');
+            bookingForm.reset();
+        });
+
+        // القاموس الكامل لضمان تغيير كل الكلمات (AR - FR - EN)
+        const dictionary = {
+            ar: {
+                top_hours: "مفتوح 24 سا/24 سا - طيلة أيام الأسبوع",
+                top_location: "وسط المدينة (Centre Ville)، بشار",
+                logo_title: "مخبر التحاليل الطبية",
+                logo_sub: "الدكتور مراح كريم",
+                nav_about: "عن المخبر",
+                nav_services: "التحاليل والخدمات",
+                nav_reviews: "آراء المرضى",
+                nav_contact: "اتصل بنا",
+                nav_booking_btn: "حجز موعد للتحليل",
+                hero_badge: "دقة في النتائج، سرعة في الإنجاز، وثقة في التشخيص",
+                hero_title_1: "مخبر التحاليل الطبية",
+                hero_title_colored: "للدكتور مراح كريم",
+                hero_description: "مخبركم المعتمد في قلب مدينة بشار، مجهز بأحدث تقنيات التحليل الآلي لتوفير نتائج طبية دقيقة وموثوقة لمختلف التحاليل البيولوجية والهرمونية على مدار الساعة 24/24.",
+                hero_booking_btn: "احجز موعد لتحليلك",
+                live_status_label: "حالة المخبر",
+                live_status_active: "نستقبل التحاليل حالياً",
+                services_tag: "باقة التحاليل المتوفرة",
+                services_title: "تشخيص دقيق لمختلف التخصصات البيولوجية",
+                acc_title_1: "تحاليل الدم الروتينية والشاملة",
+                acc_desc_1: "(FNS, Glycémie, Cholestérol, Bilan Rénal). نتائج دقيقة وسريعة للاطمئنان على صحتك العامة.",
+                acc_title_2: "التحاليل الهرمونية والمناعية",
+                acc_desc_2: "تحاليل الغدة الدرقية، هرمونات الخصوبة، تحاليل الحمل، بأجهزة مؤتمتة بالكامل خالية من الأخطاء.",
+                acc_title_3: "تحاليل الاستعجالات 24/24",
+                acc_desc_3: "نضمن استقبال وإجراء التحاليل المستعجلة ليلاً ونهاراً طيلة أيام الأسبوع مع تسليم النتائج في وقت قياسي.",
+                booking_title: "احجز موعداً لإجراء تحاليلك",
+                booking_sub: "لتفادي الانتظار، قم بتسجيل موعدك مسبقاً وسنقوم بتجهيز ملفك فور وصولك للمخبر.",
+                label_name: "الاسم واللقب *",
+                label_phone: "رقم الهاتف *",
+                label_analysis: "نوع التحليل المطلوب *",
+                select_analysis: "اختر نوع التحليل...",
+                ana_1: "تحاليل شاملة (Bilan Standard)",
+                ana_2: "تحاليل هرمونية / مناعية",
+                ana_3: "تحاليل الزواج (Bilan Prénuptial)",
+                ana_4: "تحاليل أخرى / أملك وصفة طبية",
+                label_date: "تاريخ الموعد المفضل *",
+                btn_submit: "تأكيد حجز الموعد",
+                reviews_tag: "ثقة المرضى",
+                reviews_title: "تقييمات المخبر على Google Maps",
+                reviews_sub: "حاصلون على تقييم 4.8 نجوم بفضل ثقة مرضانا الكرام في ولاية بشار.",
+                review_text_1: '"Un bon labo , Ya3tekom saha"',
+                review_sub_1: "تقييم معتمد من جوجل",
+                review_text_2: '"Mashallah. خدمة في القمة وموثوقية في النتائج."',
+                review_sub_2: "تقييم معتمد من جوجل",
+                review_text_3: '"مخبر ما شاء الله، النظافة والاستقبال في القمة، والنتيجة خرجتلي بالخف. ربي يوفقكم وطاقم طبي محترف."',
+                review_sub_3: "مريضة بالمخبر",
+                contact_tag: "موقعنا واتصالنا",
+                contact_title: "نسعد باستقبالكم وتوجيهكم",
+                contact_add_label: "العنوان الفعلي",
+                contact_phone_label: "الهاتف للإستفسار",
+                contact_email_label: "البريد الإلكتروني",
+                map_title: "تتبع موقع المخبر على خريطة بشار",
+                footer_title: "مخبر التحاليل الطبية د. مراح كريم",
+                footer_desc: "نحن هنا لخدمتكم 24 ساعة في اليوم لضمان أدق النتائج وأفضل رعاية طبية بمدينة بشار.",
+                footer_copy: "© 2026 Laboratoire Dr MERAH - جميع الحقوق محفوظة.",
+                modal_title: "تم تسجيل طلب حجزك بنجاح!",
+                modal_btn: "حسناً، فهمت"
+            },
+            fr: {
+                top_hours: "Ouvert 24h/24 - 7j/7",
+                top_location: "Centre Ville, Béchar",
+                logo_title: "Laboratoire d'Analyses",
+                logo_sub: "Dr MERAH Karim",
+                nav_about: "À Propos",
+                nav_services: "Analyses & Services",
+                nav_reviews: "Avis Patients",
+                nav_contact: "Contactez-nous",
+                nav_booking_btn: "Prendre RDV",
+                hero_badge: "Précision, Rapidité et Confiance",
+                hero_title_1: "Laboratoire d'Analyses Médicales",
+                hero_title_colored: "Dr MERAH Karim",
+                hero_description: "Votre laboratoire agréé au cœur de Béchar, équipé des dernières technologies pour des résultats précis et fiables 24h/24.",
+                hero_booking_btn: "Prendre un Rendez-vous",
+                live_status_label: "Statut Actuel",
+                live_status_active: "Laboratoire Ouvert",
+                services_tag: "Nos Analyses",
+                services_title: "Un diagnostic précis pour toutes les spécialités",
+                acc_title_1: "Bilans Sanguins Standards",
+                acc_desc_1: "(FNS, Glycémie, Cholestérol). Des résultats précis et rapides pour vérifier votre santé globale.",
+                acc_title_2: "Analyses Hormonales & Imunologiques",
+                acc_desc_2: "Thyroïde, fertilité, grossesse, avec des automates garantissant zéro erreur.",
+                acc_title_3: "Urgences 24h/24",
+                acc_desc_3: "Nous assurons la réception et le traitement des urgences jour et nuit avec remise rapide des résultats.",
+                booking_title: "Réservez votre analyse en ligne",
+                booking_sub: "Pour éviter l'attente, prenez rendez-vous à l'avance et nous préparerons votre dossier avant votre arrivée.",
+                label_name: "Nom Complet *",
+                label_phone: "Numéro de Tél *",
+                label_analysis: "Type d'analyse *",
+                select_analysis: "Choisissez l'analyse...",
+                ana_1: "Bilan Standard",
+                ana_2: "Bilan Hormonal / Immunologique",
+                ana_3: "Bilan Prénuptial",
+                ana_4: "Autres / J'ai une ordonnance",
+                label_date: "Date Souhaitée *",
+                btn_submit: "Confirmer le RDV",
+                reviews_tag: "Confiance Patients",
+                reviews_title: "Nos avis sur Google Maps",
+                reviews_sub: "Noté 4.8 étoiles grâce à la confiance de nos patients à Béchar.",
+                review_text_1: '"Un bon labo , Ya3tekom saha"',
+                review_sub_1: "Avis vérifié par Google",
+                review_text_2: '"Mashallah. Service au top et résultats fiables."',
+                review_sub_2: "Avis vérifié par Google",
+                review_text_3: '"Très bon laboratoire, propreté et accueil chaleureux. Les résultats sont rapides, équipe professionnelle."',
+                review_sub_3: "Patiente du laboratoire",
+                contact_tag: "Nous Contacter",
+                contact_title: "À votre entière disposition",
+                contact_add_label: "Adresse Physique",
+                contact_phone_label: "Téléphone",
+                contact_email_label: "Email",
+                map_title: "Localisez-nous sur la carte de Béchar",
+                footer_title: "Laboratoire Dr MERAH Karim",
+                footer_desc: "Nous sommes à votre service 24h/24 pour garantir les résultats les plus précis à Béchar.",
+                footer_copy: "© 2026 Laboratoire Dr MERAH - Tous droits réservés.",
+                modal_title: "Demande enregistrée avec succès !",
+                modal_btn: "Fermer"
+            },
+            en: {
+                top_hours: "Open 24/7",
+                top_location: "City Center, Bechar",
+                logo_title: "Medical Laboratory",
+                logo_sub: "Dr MERAH Karim",
+                nav_about: "About Us",
+                nav_services: "Tests & Services",
+                nav_reviews: "Patient Reviews",
+                nav_contact: "Contact Us",
+                nav_booking_btn: "Book an Appointment",
+                hero_badge: "Precision, Speed, and Trust",
+                hero_title_1: "Medical Diagnostics Laboratory",
+                hero_title_colored: "Dr MERAH Karim",
+                hero_description: "Your certified lab in the heart of Bechar, equipped with state-of-the-art technology for precise and reliable results 24/7.",
+                hero_booking_btn: "Book Your Test",
+                live_status_label: "Live Status",
+                live_status_active: "Laboratory is Open",
+                services_tag: "Our Tests",
+                services_title: "Accurate Diagnostics for All Specialties",
+                acc_title_1: "Standard Blood Tests",
+                acc_desc_1: "(CBC, Glucose, Cholesterol). Fast and accurate results for your general health check.",
+                acc_title_2: "Hormonal & Immunological Tests",
+                acc_desc_2: "Thyroid, fertility, pregnancy tests run on fully automated, error-free analyzers.",
+                acc_title_3: "24/7 Emergencies",
+                acc_desc_3: "We process emergency tests day and night, delivering results in record time.",
+                booking_title: "Book Your Lab Test Online",
+                booking_sub: "Avoid waiting by booking in advance. We will prepare your file before your arrival.",
+                label_name: "Full Name *",
+                label_phone: "Phone Number *",
+                label_analysis: "Test Type *",
+                select_analysis: "Select a test...",
+                ana_1: "Standard Panel",
+                ana_2: "Hormonal / Immune Panel",
+                ana_3: "Prenuptial Tests",
+                ana_4: "Other / I have a prescription",
+                label_date: "Preferred Date *",
+                btn_submit: "Confirm Booking",
+                reviews_tag: "Patient Trust",
+                reviews_title: "Our Google Maps Reviews",
+                reviews_sub: "Rated 4.8 stars thanks to the trust of our patients in Bechar.",
+                review_text_1: '"A great lab, thank you"',
+                review_sub_1: "Google Verified Review",
+                review_text_2: '"Mashallah. Top service and reliable results."',
+                review_sub_2: "Google Verified Review",
+                review_text_3: '"Wonderful lab! Clean, welcoming, and fast results. Professional medical team."',
+                review_sub_3: "Lab Patient",
+                contact_tag: "Contact Location",
+                contact_title: "We are happy to welcome you",
+                contact_add_label: "Physical Address",
+                contact_phone_label: "Phone Number",
+                contact_email_label: "Email Address",
+                map_title: "Locate us on Bechar's map",
+                footer_title: "Dr MERAH Karim Laboratory",
+                footer_desc: "At your service 24/7 to guarantee the most accurate results in Bechar.",
+                footer_copy: "© 2026 Laboratoire Dr MERAH - All rights reserved.",
+                modal_title: "Booking request successful!",
+                modal_btn: "Close"
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+            
+            const langLabels = { ar: "العربية", fr: "Français", en: "English" };
+            document.getElementById('currentLangLabel').textContent = langLabels[lang];
+            document.getElementById('langDropdown').classList.add('hidden');
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(dictionary[lang] && dictionary[lang][key]) el.textContent = dictionary[lang][key];
+            });
+            
+            const placeholders = {
+                ar: "أدخل اسمك الكامل",
+                fr: "Votre nom complet",
+                en: "Your full name"
+            };
+            document.getElementById('patientName').placeholder = placeholders[lang];
+        }
+        
+        document.getElementById('langBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('langDropdown').classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => document.getElementById('langDropdown').classList.add('hidden'));
+    </script>
+</body>
+</html>
